@@ -1,11 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
+import netlify from '@astrojs/netlify';
 import svelte from '@astrojs/svelte';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
-import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,12 +13,11 @@ export default defineConfig({
     svelte({extensions:['.svelte']}), 
     sitemap(),
   ],
+   adapter: netlify(),
   vite:{
     css:{
       transformer:'postcss'
     },
-    output: "server",
-   adapter: node({ mode: "standalone" }),
     plugins: [
       tailwindcss(),
       paraglideVitePlugin({

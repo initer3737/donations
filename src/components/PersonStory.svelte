@@ -17,7 +17,7 @@
     
     // 2. Langsung picu fetch data API di sini saat komponen mendarat di browser!
     onMount(() => {
-        fetchDonationsData();
+        fetchDonationsData({});
     });
 
     // Jalankan log di dalam $effect (bukan console.log biasa) agar terpantau saat data berubah dari kosong menjadi ada

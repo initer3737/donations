@@ -16,10 +16,12 @@ export const datas_donations_persons = writable<StoreType>({
 });
 
 // 2. Buat fungsi fetch mandiri di dalam store
-export const fetchDonationsData = async () => {
+export const fetchDonationsData = async ({q_param=undefined}:{q_param?:string|undefined}) => {
     try {
+        let q_params=""
+        if(q_param !== undefined)q_params=`?q_search=${q_param}`
         // Ambil URL API, pastikan ada fallback jika env Astro tidak terbaca di client
-        const url = import.meta.env.PUBLIC_API_URL || import.meta.env.PUBLIC_API_URL;
+        const url = import.meta.env.PUBLIC_API_URL || import.meta.env.PUBLIC_API_URL+q_params
         
         if (!url) {
             console.error("API URL tidak ditemukan di ENV!");
