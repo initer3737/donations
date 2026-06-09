@@ -1,0 +1,31 @@
+---
+import Image from "astro/components/Image.astro"
+import donate from '../assets/donate.png'
+"before:w-[calc(2*100%)] before:h-2 hover:before:bg-amber-300 before:block before:relative before:top-11 relative"
+const urls=[
+    {href:"/",link:"home"},
+    {href:"/",link:"about"},
+    {href:"/",link:"faq"},
+]
+---
+<nav class="flex flex-gap-3 items-end ">
+    <div class="logo">
+        <Image src={donate} alt={"donation image"} class={"w-[5.45rem]"}/>
+    </div>
+    <section class="w-full overflow-x-hidden">
+        <div class="links-main flex justify-around px-5 gap-3 text-3xl transition-all duration-300 ease-in">
+            {urls.map((value,idx)=>(
+                <a href={value.href} class={`before:transition-all before:duration-500 before:ease before:w-(--lebar-custom) before:h-2 hover:before:bg-amber-300 before:block before:relative before:top-11 relative before:left-1/2 before:-translate-x-1/2`}
+                    style={`--lebar-custom: calc(${idx + 2} * 100%)`}
+                >{value.link}</a>
+            ))}
+            <!-- <a href="/">about us</a>
+            <a href="/">faq</a> -->
+        </div>
+        <div class="links  bg-slate-200  p-2">
+            <a href="/">home</a>
+            <a href="/">about us</a>
+            <a href="/">faq</a>
+        </div>
+    </section>
+</nav>
