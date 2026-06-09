@@ -1,0 +1,68 @@
+---
+import Card from "./card.svelte"
+import PersonStory from './PersonStory.svelte'
+import axios from 'axios'
+    const date=new Date()
+    const year=date.getFullYear()
+    type t_person_Data={
+        id:number ,
+        name:string,
+        youtube_profile:{
+             src: string, 
+             type: string
+        },
+        youtube_channel:{
+            src:string
+        },
+        links:{
+            name:string,
+            url:string
+        }[],
+        image: string,
+        story: string,
+        country_name:string
+    }
+    type t_data={
+            persons:{
+                datas:{
+                    [page:string]:t_person_Data[]
+                }
+            }
+
+    }
+    const response=await axios.get(import.meta.env.api_url)
+    const data:t_data[]=Object.values(response.data.data.countries).map((data:any)=>{
+        return data.persons.datas
+    })
+const data_entries=Object.entries(data[0])  
+// console.log(data_entries) 
+---
+
+<footer class="bg-emerald-950 px-5 pb-8 mt-24 text-white relative">
+    <div class="footer-content- hidden md:block bg-emerald-800 relative -top-8.75 left-2 -right-5 transform  rounded-xl shadow-lg">
+        <div class="flex flex-col md:flex-row gap-5 justify-around items-center py-4 px-6">
+            <div class="le max-w-xl">
+               <h3 class="text-xl md:text-2xl font-bold leading-snug">
+                    Together we can help and make them a better life
+               </h3>
+               <h3 class="text-xl md:text-2xl font-bold leading-snug">
+                 "Every drop counts. Your donation today creates a ripple of hope for the future."
+               </h3>
+            </div>
+            <div class="right shrink-0">
+                <PersonStory client:load />
+            </div>
+        </div>
+    </div>
+
+    <div class="text-container pt-8 mt-8 border-t border-emerald-900 text-center">
+        <div class="w-full h-px bg-white my-2"></div>
+        <h5 class="text-emerald-300 font-medium mb-1">Save person from hunger, make a better life</h5>
+        <p class="text-sm text-emerald-400">Copyright &copy; {year}</p>
+    </div>
+</footer>
+
+
+<script>
+
+</script>

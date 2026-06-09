@@ -1,0 +1,31 @@
+---
+import Navigation from './Navigation.astro'
+import image1 from '../assets/donate.png'
+import image2 from '../assets/money.jpg'
+import image3 from '../assets/give_love.jpg'
+import image4 from '../assets/money.jpg'
+import Carousel from './Carousel.svelte'
+
+// Ambil string .src dari tiap metadata gambar Astro agar tipenya murni string URL/Path!
+const carouselImages = [
+    { src: image1.src, story: '', links: [] },
+    { src: image2.src, story: '', links: [] },
+    { src: image3.src, story: '', links: [] },
+    { src: image4.src, story: '', links: [] }
+]
+---
+<header class="w-full relative">
+    <div class="z-10">
+        <Navigation></Navigation>
+    </div>
+    <Carousel
+        is_story_appear={false}
+        is_flag_appear={false} 
+        client:load 
+        children="" 
+        duration_carousel={3000} 
+        width_image_carousel="w-full" 
+        height_image_carousel="h-64 md:h-[28rem]" 
+        images={carouselImages}
+    />
+</header>
