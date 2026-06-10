@@ -15,20 +15,34 @@ export const datas_donations_persons = writable<StoreType>({
     data: {}
 });
 
+function resolveApiRequestUrl(rawUrl: string, qParam?: string): string | undefined {
+    const trimmed = rawUrl.trim();
+    if (!trimmed) return undefined;
+
+    const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+
+    try {
+        const url = new URL(withProtocol);
+        if (qParam) {
+            url.searchParams.set('q_search', qParam);
+        }
+        return url.href;
+    } catch {
+        console.error('PUBLIC_API_URL tidak valid:', rawUrl);
+        return undefined;
+    }
+}
+
 // 2. Buat fungsi fetch mandiri di dalam store
 export const fetchDonationsData = async ({q_param=undefined}:{q_param?:string|undefined}) => {
     try {
-        let q_params=""
-        if(q_param !== undefined)q_params=`?q_search=${q_param}`
-        // Ambil URL API, pastikan ada fallback jika env Astro tidak terbaca di client
-        const url = import.meta.env.PUBLIC_API_URL || import.meta.env.PUBLIC_API_URL+q_params
-        
-        if (!url) {
-            console.error("API URL tidak ditemukan di ENV!");
+        const raw_url = import.meta.env.PUBLIC_API_URL;
+        const fullUrl = raw_url ? resolveApiRequestUrl(String(raw_url), q_param) : undefined;
+        if (!fullUrl) {
+            console.error('API URL tidak ditemukan atau tidak valid di ENV (PUBLIC_API_URL)');
             return;
         }
-
-        const response = await axios.get(url);
+        const response = await axios.get(fullUrl);
         const countriesData = Object.values(response.data.data.countries);
         
         if (countriesData.length > 0) {
