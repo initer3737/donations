@@ -1,41 +1,8 @@
 ---
-import Card from "./card.svelte"
 import PersonStory from './PersonStory.svelte'
-import axios from 'axios'
-    const date=new Date()
-    const year=date.getFullYear()
-    type t_person_Data={
-        id:number ,
-        name:string,
-        youtube_profile:{
-             src: string, 
-             type: string
-        },
-        youtube_channel:{
-            src:string
-        },
-        links:{
-            name:string,
-            url:string
-        }[],
-        image: string,
-        story: string,
-        country_name:string
-    }
-    type t_data={
-            persons:{
-                datas:{
-                    [page:string]:t_person_Data[]
-                }
-            }
 
-    }
-    const response=await axios.get(import.meta.env.api_url)
-    const data:t_data[]=Object.values(response.data.data.countries).map((data:any)=>{
-        return data.persons.datas
-    })
-const data_entries=Object.entries(data[0])  
-// console.log(data_entries) 
+const date = new Date()
+const year = date.getFullYear()
 ---
 
 <footer class="bg-emerald-950 px-5 pb-8 mt-24 text-white relative">
