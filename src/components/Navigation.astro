@@ -1,6 +1,5 @@
 ---
 import Image from "astro/components/Image.astro"
-import donate from '../assets/donate.png'
 "before:w-[calc(2*100%)] before:h-2 hover:before:bg-amber-300 before:block before:relative before:top-11 relative"
 const urls=[
     {href:"/",link:"home"},
@@ -10,7 +9,7 @@ const urls=[
 ---
 <nav class="flex flex-gap-3 items-end ">
     <div class="logo">
-        <Image src={donate} alt={"donation image"} class={"w-[5.45rem]"}/>
+        <img src="/donate.png" alt="donation image" class="w-[5.45rem]" />
     </div>
     <section class="w-full overflow-x-hidden">
         <div class="links-main flex justify-around px-5 gap-3 text-3xl transition-all duration-300 ease-in">
@@ -29,3 +28,4 @@ const urls=[
         </div>
     </section>
 </nav>
+
