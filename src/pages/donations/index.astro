@@ -1,8 +1,15 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro"
+import BreadCrumbsChangers from "@/components/BreadCrumbsChangers.svelte";
+import Donation from '@/components/pages/Donation.svelte'
+import axios from "axios";
 export const prerender = false;
+
+const data=axios.get("")
 ---
 
 <BaseLayout>
+    <BreadCrumbsChangers urls={['donation']} client:load/>
     <div>donate index pages!</div>
+    <Donation client:load />
 </BaseLayout>

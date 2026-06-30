@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import type { Snippet } from 'svelte';
     import ImageSkeleton from './ImageSkeleton.svelte';
+	import axios from 'axios';
     
     interface CarouselItemData {
         src: string;
@@ -22,6 +23,7 @@
     let { img, width_image_carousel,is_story_appear,is_flag_appear=false, height_image_carousel, children }: t_props = $props();
 
     let isError = $state(false);
+    let isNetworkError = $state(false);
     let isMounted = $state(false);
     
     let src = $derived(img?.src || '');
@@ -32,6 +34,11 @@
         } else {
             isError = true;
         }
+        
+        axios.get(src).then(data=>data.data).catch(err=>{
+            const message_error_network=new RegExp("Network Error","i").test(err)
+             isNetworkError=message_error_network
+        })
     });
 
     onMount(() => {
@@ -41,7 +48,7 @@
 
 <div class="w-full min-w-full shrink-0 flex flex-col">
     <div class="w-full relative overflow-hidden {height_image_carousel} bg-gray-200 rounded-xl">
-        {#if isMounted && !isError}
+        {#if isMounted && !isError&&!isNetworkError}
             <img 
                 src={src} 
                 alt="Carousel Item" 
@@ -62,6 +69,7 @@
             <h4>Story</h4>
         </div>
         <div class="flex gap-3 w-full flex-col">
+            <p class="before:pb-2 before:w-full before:h-1 before:bg-white before:absolute before:bottom-0 before:left-0 before:content-[*]  before:pt-2 text-3xl">{img?.name || ''}</p>
             <p>{img?.story || ''}</p>
             <div class="btn-carities flex gap-2">
                 {#if img?.links}

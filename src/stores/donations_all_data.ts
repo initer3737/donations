@@ -28,7 +28,7 @@ function resolveApiRequestUrl(rawUrl: string, qParam?: string): string | undefin
         }
         return url.href;
     } catch {
-        console.error('PUBLIC_API_URL tidak valid:', rawUrl);
+        // console.error('PUBLIC_API_URL tidak valid:', rawUrl);
         return undefined;
     }
 }
@@ -39,7 +39,7 @@ export const fetchDonationsData = async ({q_param=undefined}:{q_param?:string|un
         const raw_url = import.meta.env.PUBLIC_API_URL;
         const fullUrl = raw_url ? resolveApiRequestUrl(String(raw_url), q_param) : undefined;
         if (!fullUrl) {
-            console.error('API URL tidak ditemukan atau tidak valid di ENV (PUBLIC_API_URL)');
+            // console.error('API URL tidak ditemukan atau tidak valid di ENV (PUBLIC_API_URL)');
             return;
         }
         const response = await axios.get(fullUrl);
@@ -57,6 +57,6 @@ export const fetchDonationsData = async ({q_param=undefined}:{q_param?:string|un
             });
         }
     } catch (error) {
-        console.error("Gagal mengambil data donasi di store:", error);
+        // console.error("Gagal mengambil data donasi di store:", error);
     }
 };

@@ -1,5 +1,5 @@
 ---
-import Navigation from './Navigation.astro'
+import Navigation from './Navigation.svelte'
 import image1 from '../assets/donate.png'
 import image2 from '../assets/money.jpg'
 import image3 from '../assets/give_love.jpg'
@@ -16,7 +16,7 @@ const carouselImages = [
 ---
 <header class="w-full relative">
     <div class="z-10">
-        <Navigation></Navigation>
+        <Navigation client:load></Navigation>
     </div>
     <Carousel
         is_story_appear={false}

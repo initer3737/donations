@@ -1,4 +1,3 @@
-
 ---
 import Card from '@/components/card.svelte'
 import BaseLayout from '@/layouts/BaseLayout.astro'
@@ -6,8 +5,17 @@ export const prerender = false;
 ---
 
 <BaseLayout>
-	<Card client:visible card_title="Judul Donasi" 
-  card_description="Deskripsi singkat donasi"
-  card_content="Ini konten string"></Card>
+	<Card client:load card_title="Judul Donasi" 
+  card_description="Deskripsi singkat donasi">
+  <div>
+    <h1>jack</h1>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam error similique explicabo quidem et dignissimos obcaecati. Eum excepturi hic quo ut eligendi. Exercitationem distinctio aspernatur eligendi quia cumque quibusdam fugiat.
+    </p>
+  </div>
+</Card>
+  <div class="bg-green-400 px-4 py-2 text-white">
+    <h4 class="text-2xl">your donations can changes their live for ever</h4>
+    <p class="px-3 ">"Humanity begins with every small step. Donating is the best way to release burdens and meet basic needs."</p>
+  </div>
 </BaseLayout>
 

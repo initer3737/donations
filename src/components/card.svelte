@@ -9,12 +9,12 @@ import * as Card from "$lib/components/ui/card"
 type t_card={
     card_title:string,
     card_description:string,
-    card_content:string|Snippet
+    children:string|Snippet
 }
 const { 
     card_title,
     card_description,
-    card_content 
+    children 
 }:t_card = $props();
 
 
@@ -28,10 +28,10 @@ const {
     <Card.Description>{card_description}</Card.Description>
   </Card.Header>
   <Card.Content>
-    {#if typeof card_content === "function"}
-        {@render card_content()}
-    {:else if card_content}   
-        {card_content}
+    {#if typeof children === "function"}
+        {@render children()}
+    {:else if children}   
+        {children}
     {/if}   
   </Card.Content>
 </Card.Root>

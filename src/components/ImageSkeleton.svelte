@@ -3,7 +3,7 @@
     import { Skeleton } from "@/components/ui/skeleton"
 </script>
 
-<Card class="w-full max-w-xs">
+<Card class="w-full max-w-md">
       <CardHeader>
         <Skeleton class="h-4 w-2/3" />
         <Skeleton class="h-4 w-1/2" />
