@@ -1,8 +1,10 @@
 ---
+import DonationDetail from "@/components/pages/DonationDetail.svelte";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 export const prerender = false;
+const {country,id}=Astro.params
 ---
 
 <BaseLayout>
-
+    <DonationDetail client:load {...{country,id}}/>
 </BaseLayout>

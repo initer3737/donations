@@ -71,7 +71,7 @@
         <div class="flex gap-3 w-full flex-col">
             <p class="before:pb-2 before:w-full before:h-1 before:bg-white before:absolute before:bottom-0 before:left-0 before:content-[*]  before:pt-2 text-3xl">{img?.name || ''}</p>
             <p>{img?.story || ''}</p>
-            <div class="btn-carities flex gap-2">
+            <div class="btn-carities flex gap-2 hidden">
                 {#if img?.links}
                     {#each img.links as btn_charity}
                         <a href={btn_charity.url} target="_blank" class="bg-emerald-700 text-white px-4 py-3 transition-all ease duration-500 rounded-3xl text-sm">

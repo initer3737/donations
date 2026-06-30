@@ -15,6 +15,9 @@
 		}
 	}
 
+	const pindah_halaman=({id,country}:{id:number,country:string})=>{
+		window.location.assign(`/donations/${id}/${country}`)
+	}
 	const max_page = $derived($datas_donations_persons.max_page);
 	let counter_page = $state(1);
 	let datas_person = $state([] as t_person_Data[]);
@@ -69,26 +72,19 @@
         <Card card_description="{person.country_name}" card_title="{person.country_name}">
             <div class="flag relative">
                 
-                <img src="/palestine_flag.jpg" class="rounded-full w-[45px] h-[45px] absolute right-[-10px] bottom-[-20px]" alt="">
+                <img src="/palestine_flag.jpg" class="rounded-full w-[45px] h-[45px] absolute -right-1 -bottom-1" alt="">
                 <div class="{error_img.includes(person.name)?"block":"hidden"}">
                     <ImageSkeleton/>
                 </div>
-                <img src="{person.image}" alt="" srcset="" onerror={(event)=>handleImageError(event,person.name)} class="{error_img.includes(person.name)?"hidden":"block"}">
+                <img src="{person.image}" alt="" srcset="" onerror={(event)=>handleImageError(event,person.name)} class="{error_img.includes(person.name)?"hidden":"block"} rounded-md">
             </div>
            <div class="mt-4">
             <p>{person.name}</p>
             <p>{person.story.length>20?person.story.substring(1,20)+"...":person.story}</p>
-            <button class="bg-green-400 text-white px-4 py-2 mt-4 rounded-md cursor-pointer w-full md:w-1/2">see me</button>
+            <button class="bg-green-400 text-white px-4 py-2 mt-4 rounded-md cursor-pointer w-full md:w-1/2" onclick={()=>pindah_halaman({id:person.id,country:person.country_name})}>see me</button>
            </div>
         </Card>
     {/each}
 </div>
 <p class="{is_loading?"block":"hidden"} text-center">loading...</p>
-    <div class="pagination flex gap-3 flex-wrap justify-center mt-5 relative hidden">
-        {#each Array.from({length:max_page}) as _,idx}
-           <div class="{counter_page==idx+1?"border-b-3 border-l-3":"px-1 py-1 before:absolute before:border-8"}  text-white">
-             <button onclick={()=>counter_page=idx+1} class=" px-4 py-2 cursor-pointer all duration-300 {counter_page==idx+1?"text-green-900":"bg-green-400 hover:bg-green-600"}">page {idx+1}</button>
-           </div>
-        {/each}
-    </div>
 </div>
